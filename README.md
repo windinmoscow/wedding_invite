@@ -23,7 +23,7 @@ ivanovy: { greet: "Дорогие Ольга и Игорь!", name: "Ольга 
 Пропустить конверт при проверке: `?g=alina&skip`.
 
 ## Анкета → Excel
-1. Создайте пустую Google Таблицу.
+1. Таблица уже создана: https://docs.google.com/spreadsheets/d/1dHpQH8rAg28tekzXzKCGia_Dqunj0fxkePsKHHcAmNM/edit
 2. Расширения → Apps Script → вставьте код из `rsvp-apps-script.gs` → Сохранить.
 3. «Начать развертывание» → «Новое развертывание» → тип «Веб-приложение»; «Выполнять как: Я», «Доступ: Все» → разрешить доступ.
 4. Скопируйте URL вида `https://script.google.com/macros/s/…/exec` и вставьте в `index.html`: `const RSVP_URL = '…';`
