@@ -111,13 +111,14 @@ h2.script{font-family:var(--script);font-weight:400;font-size:44px;line-height:1
 .hero .greet{font-family:var(--script);font-size:46px;color:var(--wine);line-height:1.05;margin-bottom:16px}
 .hero .phrase{font-family:var(--serif);font-size:22px;line-height:1.35;font-weight:500;max-width:360px;margin:0 auto}
 .hero .divider{width:120px;margin:22px auto 6px;color:var(--wine)}
-.kids{position:relative;height:330px;margin:44px 0 0}
-.kids .kid{position:absolute;bottom:54px;width:44%;transform-origin:bottom center;z-index:2}
-.kids .boy{left:3%;transform:rotate(-4deg)}
-.kids .girl{right:3%;transform:rotate(4deg)}
-.kids .lbl{position:absolute;z-index:4;font-family:var(--hand);font-size:28px;color:var(--wine);font-weight:700}
-.kids .lbl.l1{left:12%;top:-26px;transform:rotate(-8deg)}
-.kids .lbl.l2{right:10%;top:-30px;transform:rotate(8deg)}
+.kids{position:relative;display:flex;justify-content:space-between;align-items:flex-end;margin:30px 0 0;padding:0 3% 54px}
+.kids .kid{width:44%;display:flex;flex-direction:column;align-items:center;transform-origin:bottom center;z-index:2}
+.kids .kid img{width:100%}
+.kids .boy{transform:rotate(-4deg)}
+.kids .girl{transform:rotate(4deg)}
+.kids .lbl{font-family:var(--hand);font-size:28px;color:var(--wine);font-weight:700;line-height:1;margin-bottom:14px}
+.kids .boy .lbl{transform:rotate(-6deg)}
+.kids .girl .lbl{transform:rotate(4deg)}
 .kids .heart{position:absolute;color:var(--wine);z-index:3}
 .cupid{position:relative;height:190px;margin:6px -10px 0}
 .cupid svg{width:100%;height:100%;overflow:visible;color:var(--wine)}
@@ -374,8 +375,6 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     <svg class="divider rv d2" viewBox="0 0 120 20"><path class="ic" d="M4 10c18-8 30 8 48 0 6-3 10-3 16 0 18 8 30-8 48 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><use href="#i-heart-f" x="52" y="0" width="16" height="16"/></svg>
 
     <div class="kids rv d2">
-      <span class="lbl l1">жених</span>
-      <span class="lbl l2">невеста</span>
       <svg class="ic heart float" style="width:34px;height:34px;left:45%;top:30px;--r:-10deg"><use href="#i-heart"/></svg>
       <svg class="heart float s3" style="width:20px;height:20px;left:2%;top:40px;--r:10deg"><use href="#i-heart-f"/></svg>
       <svg class="ic heart float s2" style="width:26px;height:26px;right:1%;top:20px;--r:12deg"><use href="#i-heart"/></svg>
@@ -386,8 +385,8 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
       <svg class="heart float s3" style="width:14px;height:14px;right:2%;top:120px"><use href="#i-heart-f"/></svg>
       <svg class="ic heart float s2" style="width:18px;height:18px;left:30%;top:-6px;--r:-6deg"><use href="#i-sparkle"/></svg>
       <svg class="ic heart float" style="width:16px;height:16px;right:34%;top:-14px"><use href="#i-sparkle"/></svg>
-      <img class="kid boy" src="img/boy.png" alt="Михаил в детстве">
-      <img class="kid girl" src="img/girl.png" alt="Александра в детстве">
+      <div class="kid boy"><span class="lbl">жених</span><img src="img/boy.png" alt="Михаил в детстве"></div>
+      <div class="kid girl"><span class="lbl">невеста</span><img src="img/girl.png" alt="Александра в детстве"></div>
       <div class="banner">мы женимся!</div>
     </div>
     <div class="cupid" id="cupid" aria-hidden="true">
@@ -704,7 +703,7 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
 <script src="guests.js"></script>
 <script>
 /* Адрес Google Apps Script (см. README.md). Пока пусто — ответы сохраняются только в браузере. */
-const RSVP_URL = '';
+const RSVP_URL = 'https://script.google.com/macros/s/AKfycbwBa1sSpNvaMJuf3VwgkXvbJwrGf0zM1OD_kcYc_xU7Ip18uKFU0mSGg7InlG9yTQ4N/exec';
 
 /* ---------- гость ---------- */
 const params = new URLSearchParams(location.search);
