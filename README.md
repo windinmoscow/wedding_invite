@@ -35,3 +35,8 @@ ivanovy: { greet: "Дорогие Ольга и Игорь!", name: "Ольга 
 ## Фото
 - ЗАГС: Svetlov Artem, Wikimedia Commons, CC BY-SA 4.0 (обработано)
 - Ресторан: иллюстрация с сайта cafemichel.ru (можно заменить на фото Белого зала — файл `img/michel.jpg`)
+
+## Версии
+- `index.html` — текущая версия (boost).
+- `original.html` — первоначальная версия, архив; открывается как `/original.html?g=<ключ>`.
+- Откат на первоначальную: `cp original.html index.html`, закоммитить и запушить (она же сохранена в git под тегом `original-v1`).

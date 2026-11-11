@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#5b0e1c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 56S8 41 8 24a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 17-24 32-24 32z' fill='%237a1528'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -313,6 +313,140 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
 .music.muted .on{display:none}.music.muted .off{display:block}
 .music:not(.muted)::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--wine);animation:ring 2s ease-out infinite}
 @keyframes ring{from{opacity:.8;transform:scale(.9)}to{opacity:0;transform:scale(1.35)}}
+/* =====================================================================
+   BOOST — надстройка над базовой версией
+   ===================================================================== */
+:root{
+  --gold:#c9a66b; --gold-d:#9c7a45; --gold-l:#e6cf9f;
+  --script:'Great Vibes','Marck Script',cursive;
+  --display:'Cormorant Garamond',Georgia,serif;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* полоска прогресса */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-d),var(--gold-l) 60%,var(--gold));transform-origin:0 50%;transform:scaleX(0)}
+
+/* заголовки */
+h2.script{font-size:56px;line-height:1.08;margin-bottom:16px}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-d)}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:currentColor;opacity:.7}
+.wine .eyebrow{color:var(--gold-l)}
+
+/* ---------- конверт ---------- */
+#intro{background:radial-gradient(ellipse at 50% 40%,#8c1b31 0%,#5b0e1c 46%,#2a060d 100%);overflow:hidden;gap:24px;transition:opacity .7s ease, visibility .7s}
+#dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+#intro .eyebrow{color:var(--gold-l);opacity:0;animation:fadeUp 1s .1s forwards;margin-bottom:-12px}
+#intro .to{font-size:50px;text-shadow:0 4px 18px rgba(0,0,0,.35)}
+#intro.opening .eyebrow{animation:none;opacity:0;transition:opacity .4s}
+.env .letter .l1{font-family:var(--display);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.env .seal::after{content:"";position:absolute;inset:-12%;border-radius:50%;border:1.5px solid var(--gold-l);animation:ring 2.2s ease-out infinite;pointer-events:none}
+.env.open .seal::after{animation:none;opacity:0}
+.veil{position:absolute;inset:0;z-index:20;pointer-events:none;clip-path:circle(0 at 50% 46%);transition:clip-path 1.15s cubic-bezier(.6,0,.3,1)}
+#intro.veiled .veil{clip-path:circle(150% at 50% 46%)}
+
+/* ---------- первый экран ---------- */
+.topline{position:absolute;top:20px;left:24px;right:24px;display:flex;justify-content:space-between;font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d)}
+.hero{padding-top:124px}
+.hero .greet{font-size:56px;line-height:1.05}
+.kids .kid img{filter:drop-shadow(0 10px 14px rgba(61,9,18,.28))}
+.kids .kid,.kids .banner{opacity:0}
+.kids.in .boy{animation:popL 1s .25s cubic-bezier(.3,1.4,.5,1) both}
+.kids.in .girl{animation:popR 1s .45s cubic-bezier(.3,1.4,.5,1) both}
+.kids.in .banner{animation:stamp .6s 1.2s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes popL{from{opacity:0;transform:translate(-50px,30px) rotate(-18deg) scale(.7)}to{opacity:1;transform:rotate(-4deg)}}
+@keyframes popR{from{opacity:0;transform:translate(50px,30px) rotate(18deg) scale(.7)}to{opacity:1;transform:rotate(4deg)}}
+@keyframes stamp{from{opacity:0;transform:translateX(-50%) rotate(-12deg) scale(1.9)}to{opacity:1;transform:translateX(-50%) rotate(-3deg)}}
+
+/* имена */
+.recognize{padding-bottom:84px}
+.names{font-family:var(--display);font-style:italic;font-weight:300;font-size:min(15.5vw,72px);line-height:.95;letter-spacing:-.01em;margin-top:34px}
+.names .split{display:block}
+.names .n1{text-align:left;padding-left:1%}
+.names .n2{text-align:right;padding-right:3%}
+.names .amp{display:block;font-family:var(--script);font-style:normal;font-size:.95em;line-height:1;margin:-.08em 0 -.02em;color:var(--gold-d)}
+.split i{display:inline-block;font-style:inherit;opacity:0;transform:translateY(.45em) rotate(7deg);transition:opacity .7s ease, transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i) * 55ms + .2s)}
+.in .split i{opacity:1;transform:none}
+
+/* круглая наклейка */
+.badge{position:absolute;left:20px;bottom:-26px;width:100px;height:100px;z-index:4;color:var(--wine);filter:drop-shadow(0 6px 10px rgba(61,9,18,.35));transform:rotate(-8deg)}
+.badge svg{width:100%;height:100%;overflow:visible;display:block}
+.badge .spin{transform-origin:50px 50px;animation:spin 18s linear infinite}
+
+/* бегущая строка */
+.mq-wrap{padding:22px 0;position:relative;overflow:hidden}
+.marquee{position:relative;z-index:3;margin:0 -6%;transform:rotate(-2.2deg);background:var(--wine);color:var(--cream);padding:9px 0 11px;overflow:hidden;white-space:nowrap;box-shadow:0 8px 20px rgba(61,9,18,.3)}
+.marquee.rev{transform:rotate(2deg)}
+.marquee .track{display:inline-flex;animation:marq 30s linear infinite}
+.marquee.rev .track{animation-direction:reverse}
+.marquee span{font-family:var(--display);font-style:italic;font-size:22px;padding:0 13px}
+.marquee b{color:var(--gold-l);font-weight:400;font-style:normal;font-size:14px;padding:0 2px;align-self:center}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* полароиды «проявляются» */
+.pol img{transition:filter 2.4s .45s ease}
+.pol.rv:not(.in) img,.rv:not(.in) .pol img{filter:brightness(1.7) contrast(.45) sepia(.7) blur(3px)}
+
+.love .eq{font-size:37px;white-space:nowrap;gap:8px}
+.place h2.plain{font-family:var(--display);font-style:italic;font-weight:400;font-size:54px;letter-spacing:.06em;line-height:1}
+.ev .t,.countdown b,.final .bigdate,.scratch .prize b,.cal-head,.date-line{font-variant-numeric:lining-nums}
+/* ---------- билет ---------- */
+.ticket::before{border-color:rgba(230,207,159,.75)}
+.ticket .t-top{color:var(--gold-l);opacity:1}
+.scratch::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.6) 50%,transparent 58%);background-size:260% 100%;animation:shine 3.4s ease-in-out infinite}
+.scratch.touched::after,.scratch.done::after{display:none}
+@keyframes shine{0%{background-position:130% 0}55%,100%{background-position:-70% 0}}
+.burst.gold{color:var(--gold)}
+.countdown{gap:8px}
+.countdown div{min-width:64px;background:rgba(255,255,255,.35)}
+
+.countdown b.flip{animation:flip .45s ease}
+@keyframes flip{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.btn.sm{padding:10px 16px;font-size:11.5px}
+
+/* ---------- тайминг ---------- */
+.timeline > svg.rail{position:absolute;left:50%;top:0;height:100%;width:24px;transform:translateX(-50%);color:var(--line);overflow:visible;opacity:.55}
+.timeline > svg.path{stroke-width:2.2}
+.timeline .runner{position:absolute;left:50%;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;color:var(--wine);z-index:3;filter:drop-shadow(0 2px 4px rgba(61,9,18,.4));will-change:transform}
+.ev .t{font-family:var(--display);font-style:italic;font-weight:500;font-size:38px;letter-spacing:-.01em}
+.ev .dot{width:10px;height:10px;background:var(--paper);border:1.5px solid var(--wine);transition:background .4s, transform .4s}
+.ev.on .dot{background:var(--wine);transform:translate(-50%,-50%) scale(1.25)}
+.ev .icon svg{opacity:.3;transform:scale(.82) rotate(-6deg);transition:transform .8s cubic-bezier(.3,1.5,.5,1), opacity .8s}
+.ev.on .icon svg{opacity:1;transform:none}
+
+/* ---------- дресс-код ---------- */
+.group.rv .sw{opacity:0;transform:scale(.4);transition:opacity .6s, transform .7s cubic-bezier(.3,1.5,.5,1)}
+.group.rv.in .sw{opacity:1;transform:none}
+.group.rv.in .sw:nth-child(1){transition-delay:.25s}.group.rv.in .sw:nth-child(2){transition-delay:.35s}.group.rv.in .sw:nth-child(3){transition-delay:.45s}.group.rv.in .sw:nth-child(4){transition-delay:.55s}.group.rv.in .sw:nth-child(5){transition-delay:.65s}
+
+/* ---------- финал ---------- */
+.final{padding-top:86px;padding-bottom:40px}
+.arch{position:relative;width:60%;margin:0 auto 40px}
+.arch img{width:100%;aspect-ratio:3/4.1;object-fit:cover;border-radius:999px 999px 6px 6px;box-shadow:0 16px 32px rgba(61,9,18,.3)}
+.arch::before{content:"";position:absolute;inset:-10px;border:1.5px solid var(--gold);border-radius:999px 999px 12px 12px;pointer-events:none}
+.arch .spark{position:absolute;color:var(--gold-d);width:26px;height:26px}
+.final .sign{font-size:54px}
+.final .bigdate{font-family:var(--display);font-style:italic;font-weight:300;font-size:min(22vw,104px);line-height:1;margin-top:30px;letter-spacing:.01em;color:rgba(122,21,40,.16)}
+
+/* ---------- музыка: пластинка ---------- */
+.music{width:54px;height:54px;border:2px solid var(--gold-l);
+  background:radial-gradient(circle,var(--wine) 0 37%,transparent 38%),repeating-radial-gradient(circle,#1c0609 0 2px,#3a121d 2px 3.2px)}
+.music svg{width:17px;height:17px}
+.music.show:not(.muted){animation:spin 6s linear infinite}
+.music:not(.muted)::after{border-color:var(--gold-l)}
+
+/* сердечко по касанию */
+.tap{position:fixed;width:22px;height:22px;margin:-11px 0 0 -11px;pointer-events:none;z-index:70;animation:tap 1s ease-out forwards}
+@keyframes tap{from{opacity:.9;transform:scale(.4)}to{opacity:0;transform:translateY(-70px) scale(1.25) rotate(var(--rot,0deg))}}
+
+@media (prefers-reduced-motion:reduce){
+  .kids .kid,.kids .banner{opacity:1!important;animation:none!important}
+  .split i{opacity:1;transform:none;transition:none}
+  .marquee .track,.badge .spin,.music.show:not(.muted),.scratch::after{animation:none}
+  .pol img{filter:none!important}
+  .ev .icon svg{opacity:1;transform:none}
+  .group.rv .sw{opacity:1;transform:none}
+}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -353,6 +487,8 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
 
 <!-- ====== КОНВЕРТ ====== -->
 <div id="intro" class="wine">
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="eyebrow">приглашение на свадьбу</div>
   <div class="to" id="introTo">Для Алины</div>
   <div class="env" id="env" role="button" tabindex="0" aria-label="Открыть приглашение">
     <div class="back"></div>
@@ -372,14 +508,17 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     </div>
   </div>
   <div class="hint">нажмите на печать</div>
+  <div class="veil paper"></div>
 </div>
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 
 <main class="site">
 
   <!-- ====== 1. ОБРАЩЕНИЕ + ДЕТСКИЕ ФОТО ====== -->
   <section class="hero paper">
-    <span class="deco float" style="width:58px;height:58px;left:16px;top:22px;--r:-12deg"><svg class="ic"><use href="#i-lighthouse"/></svg></span>
-    <span class="deco float s2" style="width:56px;height:56px;right:18px;top:30px;--r:14deg"><svg class="ic"><use href="#i-guitar"/></svg></span>
+    <div class="topline" aria-hidden="true"><span>А &amp; М</span><span>17 · 04 · 2027</span><span>Москва</span></div>
+    <span class="deco float" style="width:58px;height:58px;left:16px;top:52px;--r:-12deg"><svg class="ic"><use href="#i-lighthouse"/></svg></span>
+    <span class="deco float s2" style="width:56px;height:56px;right:18px;top:58px;--r:14deg"><svg class="ic"><use href="#i-guitar"/></svg></span>
 
     <div class="greet rv" id="greet">Дорогая Алина!</div>
     <p class="phrase rv d1">Есть люди, без которых мы не&nbsp;представляем этот день — и&nbsp;вы в&nbsp;их&nbsp;числе!</p>
@@ -420,7 +559,17 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     <span class="deco float" style="width:58px;height:58px;right:16px;top:70px;--r:18deg"><svg class="ic"><use href="#i-racket"/></svg></span>
     <h2 class="script rv">Узнали?</h2>
     <p class="rv d1">Да-да, это мы! Время пролетело незаметно, и&nbsp;мы скоро станем семьёй.</p>
-    <div class="names rv d2">Александра <span class="amp">&</span><br>Михаил</div>
+    <div class="names rv d2" aria-label="Александра и Михаил"><span class="split n1">Александра</span><span class="amp">&amp;</span><span class="split n2">Михаил</span></div>
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="49" fill="#fbf6ee" stroke="currentColor" stroke-width="1"/>
+        <g class="spin">
+          <path id="badgeArc" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0" fill="none"/>
+          <text font-family="Montserrat, sans-serif" font-weight="600" font-size="9" fill="currentColor"><textPath href="#badgeArc" textLength="228" lengthAdjust="spacing">МЫ ЖЕНИМСЯ ✦ 17.04.2027 ✦</textPath></text>
+        </g>
+        <use href="#i-heart-f" x="33" y="33" width="34" height="34"/>
+      </svg>
+    </div>
   </section>
 
   <!-- ====== 2. МЫ СЕЙЧАС ====== -->
@@ -472,6 +621,7 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
   <section class="paper" id="date">
     <span class="deco float" style="width:54px;height:54px;left:14px;top:40px;--r:-8deg"><svg class="ic"><use href="#i-spanish"/></svg></span>
     <span class="deco float s3" style="width:52px;height:52px;right:16px;top:44px;--r:10deg"><svg class="ic"><use href="#i-heart"/></svg></span>
+    <div class="eyebrow rv">когда</div>
     <h2 class="script rv">Счастливый билет</h2>
     <p class="cal-intro rv d1">Свой главный выигрыш мы уже получили — это вы, наши близкие. А&nbsp;для вас у&nbsp;нас есть счастливый билет: сотрите защитный слой и&nbsp;узнайте, когда мы ждём вас на&nbsp;нашей свадьбе!</p>
     <div class="ticket wine rv d2">
@@ -493,17 +643,26 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
         <div><b id="cdD">—</b><span>дней</span></div>
         <div><b id="cdH">—</b><span>часов</span></div>
         <div><b id="cdM">—</b><span>минут</span></div>
+        <div><b id="cdS">—</b><span>секунд</span></div>
+      </div>
+      <div class="btns">
+        <a class="btn sm" id="icsBtn" download="svadba-sasha-misha.ics"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>В календарь</a>
+        <a class="btn sm ghost" id="gcalBtn" target="_blank" rel="noopener">Google Календарь</a>
       </div>
     </div></div>
   </section>
 
+  <div class="mq-wrap paper" aria-hidden="true"><div class="marquee" data-items="17 апреля 2027|Александра &amp; Михаил|мы женимся|суббота"></div></div>
+
   <!-- ====== 4. ТАЙМИНГ ====== -->
   <section class="paper" id="timing" style="padding-top:20px">
+    <div class="eyebrow rv">как пройдёт день</div>
     <h2 class="script rv">Тайминг дня</h2>
     <div class="timeline">
-      <svg class="path draw" viewBox="0 0 24 1000" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+      <svg class="path" viewBox="0 0 24 1000" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
         <path d="M12 0C4 60 20 110 12 170S4 280 12 340s8 110 0 170-8 110 0 170 8 110 0 170-4 100 0 150" vector-effect="non-scaling-stroke"/>
       </svg>
+      <svg class="runner" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-heart-f"/></svg>
       <div class="ev rv" data-only="zags">
         <div class="side-a"><div class="t">13:30</div><div class="txt">Регистрация брака<br>в ЗАГСе</div></div>
         <div class="side-b icon"><svg class="ic"><use href="#i-rings"/></svg></div>
@@ -536,8 +695,9 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     <svg class="torn-edge top" preserveAspectRatio="none"><path/></svg>
     <span class="deco float" style="width:56px;height:56px;left:16px;top:30px;--r:-10deg"><svg class="ic"><use href="#i-rings"/></svg></span>
     <span class="deco float s2" style="width:54px;height:54px;right:16px;top:36px;--r:12deg"><svg class="ic"><use href="#i-gamepad"/></svg></span>
-    <h2 class="script rv">ЗАГС</h2>
-    <div class="pol rv d1"><img src="img/zags.jpg" alt="Библиотека-читальня им. А.С. Пушкина" loading="lazy"><div class="cap">здесь мы скажем «да»</div></div>
+    <div class="eyebrow rv">где регистрация</div>
+    <h2 class="script plain rv">ЗАГС</h2>
+    <div class="pol rv d1"><img src="img/zags.jpg" alt="Библиотека-читальня им. А.С. Пушкина" loading="lazy"><div class="cap">здесь всё начнётся</div></div>
     <h3 class="rv">Библиотека-читальня<br>им.&nbsp;А.С.&nbsp;Пушкина</h3>
     <div class="addr rv">Москва, Спартаковская ул., 9</div>
     <div class="when rv">регистрация в 13:30</div>
@@ -554,6 +714,7 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
   <section class="place paper" id="venue">
     <span class="deco float s3" style="width:56px;height:56px;left:16px;top:34px;--r:-14deg"><svg class="ic"><use href="#i-joystick"/></svg></span>
     <span class="deco float" style="width:58px;height:58px;right:14px;top:40px;--r:8deg"><svg class="ic"><use href="#i-scooter"/></svg></span>
+    <div class="eyebrow rv">где празднуем</div>
     <h2 class="script rv">Праздник</h2>
     <div class="duo rv d1">
       <div class="pol p1"><img src="img/michel1.jpg" alt="Белый зал ресторана Michel" loading="lazy"><div class="cap">Белый зал</div></div>
@@ -570,8 +731,11 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     </div>
   </section>
 
+  <div class="mq-wrap paper" aria-hidden="true"><div class="marquee rev" data-items="ждём вас|17.04.2027|ресторан «Michel»|будет красиво"></div></div>
+
   <!-- ====== 7. ДРЕСС-КОД ====== -->
   <section class="dress paper" style="padding-top:20px">
+    <div class="eyebrow rv">в чём прийти</div>
     <h2 class="script rv">Дресс-код</h2>
     <p class="lead rv d1">Мы будем благодарны, если вы поддержите стиль нашей свадьбы при&nbsp;выборе цветовой гаммы ваших нарядов</p>
 
@@ -606,6 +770,7 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     <span class="deco float s2" style="width:52px;height:52px;left:18px;top:30px"><svg class="ic"><use href="#i-guitar"/></svg></span>
     <span class="deco float" style="width:54px;height:54px;right:18px;bottom:40px;--r:12deg"><svg class="ic"><use href="#i-lighthouse"/></svg></span>
     <svg class="ic big rv"><use href="#i-envelope"/></svg>
+    <div class="eyebrow rv">пожелания</div>
     <h2 class="script rv">Подарки</h2>
     <p class="lead rv d1">Просим не обременять себя выбором подарка, а&nbsp;предоставить это замечательное право нам, внеся свой вклад в&nbsp;бюджет нашей молодой семьи.</p>
     <p class="small rv d2" style="margin-top:14px">И, пожалуйста, без цветов — мы просто не успеем ими насладиться</p>
@@ -630,6 +795,7 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
     <svg class="torn-edge top" preserveAspectRatio="none"><path/></svg>
     <span class="deco float" style="width:52px;height:52px;left:16px;top:30px;--r:-12deg"><svg class="ic"><use href="#i-shuttle"/></svg></span>
     <span class="deco float s2" style="width:54px;height:54px;right:16px;top:34px;--r:14deg"><svg class="ic"><use href="#i-racket"/></svg></span>
+    <div class="eyebrow rv">ваш ответ</div>
     <h2 class="script rv">Анкета гостя</h2>
     <p class="rv d1">Просим подтвердить своё присутствие на&nbsp;свадьбе после получения приглашения!</p>
 
@@ -701,6 +867,12 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
 
   <!-- ====== 11. ФИНАЛ ====== -->
   <section class="final paper">
+    <div class="arch rv">
+      <img src="img/c3.jpg" alt="Саша и Миша" loading="lazy">
+      <svg class="ic spark float" style="left:-34px;top:18%"><use href="#i-sparkle"/></svg>
+      <svg class="ic spark float s2" style="right:-36px;top:46%;width:20px;height:20px"><use href="#i-sparkle"/></svg>
+      <svg class="ic spark float s3" style="left:-30px;bottom:8%;width:22px;height:22px;color:var(--wine)"><use href="#i-heart"/></svg>
+    </div>
     <p class="lead rv">В этот день будет много слов о&nbsp;любви. Но&nbsp;самое важное для нас — просто обнять вас и&nbsp;сказать: «как хорошо, что вы&nbsp;здесь»</p>
     <div class="sign rv d1">С любовью,<br>Саша и Миша</div>
     <div class="hobbies rv d2" aria-hidden="true">
@@ -708,6 +880,7 @@ footer{padding:26px 20px 40px;text-align:center;font-size:12px;color:rgba(247,23
       <svg class="ic"><use href="#i-shuttle"/></svg><svg class="ic"><use href="#i-racket"/></svg><svg class="ic"><use href="#i-camera"/></svg>
       <svg class="ic"><use href="#i-gamepad"/></svg><svg class="ic"><use href="#i-joystick"/></svg><svg class="ic"><use href="#i-scooter"/></svg>
     </div>
+    <div class="bigdate rv" aria-hidden="true">17.04.27</div>
   </section>
 </main>
 <audio id="bgm" src="music.m4a" preload="auto" loop playsinline></audio>
@@ -760,8 +933,11 @@ document.addEventListener('visibilitychange', () => { if (document.hidden && !bg
 function openEnvelope(){
   if (env.classList.contains('open')) return;
   env.classList.add('open'); intro.classList.add('opening'); playMusic();
-  setTimeout(() => { intro.classList.add('gone'); document.body.classList.remove('locked'); window.scrollTo(0,0); revealVisible(); }, 2300);
-  setTimeout(() => intro.remove(), 3400);
+  const sr = env.querySelector('.seal').getBoundingClientRect();
+  confetti(intro, sr.left + sr.width/2, sr.top + sr.height/2, 14, 'cream');
+  setTimeout(() => intro.classList.add('veiled'), 1750);
+  setTimeout(() => { intro.classList.add('gone'); document.body.classList.remove('locked'); window.scrollTo(0,0); revealVisible(); }, 2900);
+  setTimeout(() => intro.remove(), 3700);
 }
 env.addEventListener('click', openEnvelope);
 if (params.has('skip')) { musicBtn.classList.add('show'); intro.remove(); document.body.classList.remove('locked'); document.querySelectorAll('.rv,.draw').forEach(el => el.classList.add('in')); }
@@ -799,8 +975,10 @@ function tick(){
   document.getElementById('cdD').textContent = Math.floor(s / 86400);
   document.getElementById('cdH').textContent = Math.floor(s % 86400 / 3600);
   document.getElementById('cdM').textContent = Math.floor(s % 3600 / 60);
+  const sec = document.getElementById('cdS'); sec.textContent = String(Math.floor(s % 60)).padStart(2, '0');
+  sec.classList.remove('flip'); void sec.offsetWidth; sec.classList.add('flip');
 }
-tick(); setInterval(tick, 30000);
+tick(); setInterval(tick, 1000);
 
 /* ---------- появление при прокрутке ---------- */
 document.querySelectorAll('.draw path').forEach(p => { if (!p.style.getPropertyValue('--len')) { try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch(e){} }});
@@ -837,7 +1015,7 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
     if (done) return; done = true; box.classList.add('done');
     const r = box.getBoundingClientRect(), sec = document.getElementById('date'), sr = sec.getBoundingClientRect();
     for (let i = 0; i < 18; i++) {
-      const el = document.createElementNS('http://www.w3.org/2000/svg','svg'); el.setAttribute('class','burst ic');
+      const el = document.createElementNS('http://www.w3.org/2000/svg','svg'); el.setAttribute('class','burst ic' + (i % 3 === 0 ? ' gold' : ''));
       const sz = 14 + Math.random()*18; el.style.cssText = `width:${sz}px;height:${sz}px;left:${r.left - sr.left + r.width/2}px;top:${r.top - sr.top + r.height/2}px;--x:${(Math.random()-.5)*340}px;--y:${(Math.random()-.8)*240}px;--rot:${(Math.random()-.5)*120}deg`;
       el.innerHTML = `<use href="#${Math.random() > .5 ? 'i-heart-f' : 'i-heart'}"/>`; sec.appendChild(el); setTimeout(() => el.remove(), 1500);
     }
@@ -909,11 +1087,103 @@ form.addEventListener('submit', async e => {
     form.style.display = 'none';
     if (!coming) { document.getElementById('doneTitle').textContent = 'Очень жаль!'; document.getElementById('doneText').textContent = 'Спасибо, что ответили. Будем скучать и обязательно отметим вместе позже ♡'; }
     show('doneMsg', true);
+    if (coming) setTimeout(() => { const r = document.getElementById('doneMsg').getBoundingClientRect(); confetti(document.getElementById('rsvp'), r.left + r.width/2, r.top + 40, 22, 'cream'); }, 700);
     document.getElementById('rsvp').scrollIntoView({behavior:'smooth', block:'start'});
   } catch(_) {
     err.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите Вере.';
     btn.disabled = false; btn.textContent = 'Отправить';
   }
+});
+/* =====================================================================
+   BOOST
+   ===================================================================== */
+const reduceMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* сердечки, разлетающиеся из точки (координаты — экранные) */
+function confetti(host, cx, cy, n, tone){
+  const hr = host.getBoundingClientRect();
+  for (let i = 0; i < n; i++) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg','svg'); el.setAttribute('class','burst ic');
+    const sz = 12 + Math.random()*18;
+    el.style.cssText = `width:${sz}px;height:${sz}px;z-index:30;left:${cx - hr.left}px;top:${cy - hr.top}px;color:${i % 3 === 0 ? 'var(--gold-l)' : tone === 'cream' ? 'var(--cream)' : 'var(--wine)'};--x:${(Math.random()-.5)*340}px;--y:${(Math.random()-.75)*260}px;--rot:${(Math.random()-.5)*120}deg`;
+    el.innerHTML = `<use href="#${Math.random() > .5 ? 'i-heart-f' : 'i-heart'}"/>`; host.appendChild(el); setTimeout(() => el.remove(), 1500);
+  }
+}
+
+/* золотая пыль за конвертом */
+(function(){
+  const cv = document.getElementById('dust'); if (!cv || reduceMotion) return;
+  const ctx = cv.getContext('2d'); let w, h; const ps = [];
+  function size(){ const d = Math.min(devicePixelRatio || 1, 2); w = cv.clientWidth; h = cv.clientHeight; cv.width = w*d; cv.height = h*d; ctx.setTransform(d,0,0,d,0,0); }
+  size(); addEventListener('resize', size);
+  for (let i = 0; i < 48; i++) ps.push({ x: Math.random(), y: Math.random(), r: .6 + Math.random()*1.7, s: .0003 + Math.random()*.0008, p: Math.random()*6.28, d: (Math.random()-.5)*.0003 });
+  (function loop(t){
+    if (!cv.isConnected) return;
+    ctx.clearRect(0,0,w,h);
+    for (const p of ps) {
+      p.y -= p.s; p.x += p.d + Math.sin(t/1800 + p.p)*.00015; if (p.y < -.02) { p.y = 1.02; p.x = Math.random(); }
+      ctx.beginPath(); ctx.arc(p.x*w, p.y*h, p.r, 0, 6.28); ctx.fillStyle = `rgba(230,207,159,${.2 + .6*Math.abs(Math.sin(t/900 + p.p))})`; ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  })(0);
+})();
+
+/* имена по буквам */
+document.querySelectorAll('.split').forEach(el => { el.innerHTML = [...el.textContent].map((c, i) => `<i style="--i:${i}">${c}</i>`).join(''); });
+
+/* бегущие строки */
+document.querySelectorAll('.marquee').forEach(m => {
+  const one = m.dataset.items.split('|').map(t => `<span>${t}</span><b>✦</b>`).join('');
+  m.innerHTML = `<div class="track">${one.repeat(6)}</div>`;
+});
+
+/* тайминг: линия рисуется по мере прокрутки, сердечко едет по ней */
+(function(){
+  const tl = document.querySelector('.timeline'), svg = tl.querySelector('svg.path'), path = svg.querySelector('path'), runner = tl.querySelector('.runner');
+  const rail = svg.cloneNode(true); rail.setAttribute('class', 'rail'); tl.insertBefore(rail, svg);
+  const evs = [...tl.querySelectorAll('.ev')]; evs.forEach(e => e.insertAdjacentHTML('beforeend', '<span class="dot"></span>'));
+  const len = path.getTotalLength(), bar = document.getElementById('progressBar');
+  let ticking = false;
+  function upd(){
+    ticking = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+    const r = tl.getBoundingClientRect(); if (!r.height) return;
+    const p = Math.min(1, Math.max(0, (innerHeight * .62 - r.top) / r.height));
+    const pt = path.getPointAtLength(p * len), y = pt.y / 1000 * r.height;
+    svg.style.clipPath = `inset(0 -20px ${Math.max(0, r.height - y)}px -20px)`;
+    runner.style.transform = `translate(${pt.x - 12}px,${y}px)`;
+    evs.forEach(e => e.classList.toggle('on', e.offsetTop + e.offsetHeight * .35 <= y));
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  addEventListener('resize', upd); upd(); window.updTimeline = upd;
+})();
+
+/* добавить в календарь */
+(function(){
+  const z = guest.zags, start = z ? '20270417T103000Z' : '20270417T120000Z', end = '20270417T200000Z';
+  const title = 'Свадьба Саши и Миши';
+  const loc = z ? 'Библиотека-читальня им. А.С. Пушкина, Спартаковская ул., 9, Москва' : 'Ресторан «Michel», ул. Красная Пресня, 13, Москва';
+  const lines = (z ? ['13:30 — регистрация в ЗАГСе (Библиотека-читальня им. А.С. Пушкина, Спартаковская ул., 9)'] : [])
+    .concat(['15:00 — сбор гостей и welcome в ресторане «Michel» (ул. Красная Пресня, 13, Белый зал)', '16:00 — церемония', '17:00 — банкет', '23:00 — завершение']);
+  const esc = t => t.replace(/([,;])/g, '\\$1');
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//wedding//sasha-misha//RU','BEGIN:VEVENT','UID:wedding-20270417@sasha-misha',
+    'DTSTAMP:20261101T000000Z','DTSTART:' + start,'DTEND:' + end,'SUMMARY:' + esc(title),'LOCATION:' + esc(loc),'DESCRIPTION:' + lines.map(esc).join('\\n'),
+    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:' + esc(title) + ' — завтра!','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  document.getElementById('icsBtn').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+  document.getElementById('gcalBtn').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title) + '&dates=' + start + '/' + end + '&location=' + encodeURIComponent(loc) + '&details=' + encodeURIComponent(lines.join('\n'));
+})();
+
+/* блик на билете исчезает, как только начали стирать */
+document.getElementById('scratchCanvas').addEventListener('pointerdown', () => document.getElementById('scratch').classList.add('touched'), { once: true });
+if (params.has('reveal')) setTimeout(() => window.revealTicket(), 300);
+
+/* сердечко по касанию пустого места */
+if (!reduceMotion) document.querySelector('.site').addEventListener('pointerdown', e => {
+  if (e.target.closest('a,button,input,textarea,label,canvas,iframe,form')) return;
+  const el = document.createElementNS('http://www.w3.org/2000/svg','svg'); el.setAttribute('class','tap');
+  el.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;color:${e.target.closest('.wine') ? 'var(--cream)' : 'var(--wine)'};--rot:${(Math.random()-.5)*50}deg`;
+  el.innerHTML = '<use href="#i-heart-f"/>'; document.body.appendChild(el); setTimeout(() => el.remove(), 1000);
 });
 </script>
 </body>
